@@ -23,6 +23,20 @@ contract Shop {
         _;
     }
 
+
+    function withdrawFunds() public onlyOwner {
+        owner.transfer(address(this).balance);
+    }
+
+
+    function setOwner(address payable newOwner) public onlyOwner {
+        owner = newOwner;
+    }
+
+    function getContractBalance() public view returns (uint) {
+        return address(this).balance;
+    }
+
     /*
     * @dev Add prodcuts to the shop
     * @param _NumberProducts number of products to add 
