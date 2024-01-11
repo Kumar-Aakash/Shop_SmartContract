@@ -75,4 +75,16 @@ contract Shop {
         owner.transfer(msg.value);
     }
 
+    function decreaseProductQuantity(uint _reduceQuantity) public onlyOwner {
+        require(_reduceQuantity <= NumberProducts, "Cannot reduce quantity more than available");
+        NumberProducts -= _reduceQuantity;
+    }
+
+
+    function changeOwnershipAndPrice(address payable newOwner, uint newPrice) public onlyOwner {
+        setOwner(newOwner);
+        setPrice(newPrice);
+    }
+
+
 }
