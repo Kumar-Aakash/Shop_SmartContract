@@ -75,6 +75,19 @@ contract Shop {
         owner.transfer(msg.value);
     }
 
+    function getProductInfo() public view returns (uint, uint) {
+        return (NumberProducts, Price);
+    }
+
+    function getContractBalance() public view returns (uint) {
+        return address(this).balance;
+    }
+
+
+    function increaseProductQuantity(uint _additionalQuantity) public onlyOwner {
+        NumberProducts += _additionalQuantity;
+    }
+
     function decreaseProductQuantity(uint _reduceQuantity) public onlyOwner {
         require(_reduceQuantity <= NumberProducts, "Cannot reduce quantity more than available");
         NumberProducts -= _reduceQuantity;
