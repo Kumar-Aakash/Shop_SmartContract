@@ -9,6 +9,8 @@ contract Shop {
     // Price for one product
     uint public Price;
 
+    bool public shopOpen;
+
     // Contructor of the contract
     constructor() {
         owner = payable(msg.sender);
@@ -22,6 +24,12 @@ contract Shop {
         require(msg.sender == owner, "Only owner can call this function.");
         _;
     }
+
+    modifier shopIsOpen() {
+    require(shopOpen, "Shop is currently closed.");
+    _;
+    }
+
 
 
     function withdrawFunds() public onlyOwner {
@@ -82,6 +90,11 @@ contract Shop {
     function getContractBalance() public view returns (uint) {
         return address(this).balance;
     }
+
+    function toggleShopStatus() public onlyOwner {
+        shopOpen = !shopOpen;
+    }
+
 
 
     function increaseProductQuantity(uint _additionalQuantity) public onlyOwner {
