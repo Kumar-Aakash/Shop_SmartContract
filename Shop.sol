@@ -11,6 +11,8 @@ contract Shop {
 
     bool public shopOpen;
 
+    mapping(uint => string) public productDescriptions;
+
     // Contructor of the contract
     constructor() {
         owner = payable(msg.sender);
@@ -30,7 +32,9 @@ contract Shop {
     _;
     }
 
-
+   function addProductDescription(uint productId, string memory description) public onlyOwner {
+    productDescriptions[productId] = description;
+    }
 
     function withdrawFunds() public onlyOwner {
         owner.transfer(address(this).balance);
