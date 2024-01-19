@@ -12,6 +12,10 @@ contract Shop {
     bool public shopOpen;
 
     mapping(uint => string) public productDescriptions;
+    event ProductAdded(uint indexed productId, uint quantityAdded);
+    event ProductRemoved(uint indexed productId, uint quantityRemoved);
+    event ShopStatusToggled(bool newStatus);
+    event ProductDescriptionAdded(uint indexed productId, string description);
 
     // Contructor of the contract
     constructor() {
